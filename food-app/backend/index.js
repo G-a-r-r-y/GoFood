@@ -4,10 +4,6 @@ const port = 9000;
 const mongoDB = require("./db");
 mongoDB();
 
-app.get("/",(req,res)=>{
-  res.send("This is index.js");
-})
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
