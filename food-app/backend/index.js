@@ -4,6 +4,7 @@ const port = 9000;
 const mongoDB = require("./db");
 mongoDB();
 
+app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://go-food-backend-psi.vercel.app");
   res.header(
