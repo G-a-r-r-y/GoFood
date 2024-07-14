@@ -1,0 +1,1908 @@
+Problem - navbar ke a tag par click karoge toh page refresh hoga joh react mei hona
+          nhi chahiye.
+
+Code - 
+import React from "react";
+
+function Navbar() {
+  return (
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            Navbar
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Features
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Pricing
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">
+                  Disabled
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default Navbar;
+
+
+Solution - Use react-router-dom package
+Yeh jaise harshit sir ne course mei karaya tha waise hi hoga
+
+Code -// in App.js - 
+
+import "./App.css";
+import Home from "./screens/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./screens/Login";
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+// in Navbar.js - 
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+function Navbar() {
+  return (
+    <div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+          <Link class="navbar-brand" to="#">
+            Navbar
+          </Link>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <Link class="nav-link active" aria-current="page" to="#">
+                  Home
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default Navbar;
+
+Note -1. use Link instead of a, and to instead of href.
+      2. path ki jaha exact path use kiya hai idhar.
+
+-----------------------------------------------------------------------------------------------------------
+
+Note - 1. joh changes index.css mei body mein honge woh har jagah ho jayenge.
+       2. Keep in mind the jsx nature of react.
+       3. img tag ko bhi close karna padega 
+          Ex - <img src="..." className="card-img-top" alt="..." />
+       4. Style likhne ka tareeka - style = {{"property":"value"}}
+          Ex -  <div className="card" style={{ width: "18rem" }}>
+       5. Control + shift + L to select all similar fonts.
+
+-----------------------------------------------------------------------------------------------------------
+
+Code for Card Component - 
+
+import React from "react";
+
+function Card() {
+  return (
+    <>
+      {" "}
+      <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
+        <img src="..." className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">Card title</h5>
+          <p className="card-text">This is some important text.</p>
+          <div className="container w-100">
+            <select className="m-2 h-100 bg-success rounded">
+              {Array.from(Array(6), (e, i) => {
+                return (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                );
+              })}
+            </select>
+
+            <select className="m-2 h-100 bg-success rounded">
+              <option value="half">Half</option>
+              <option value="full">Full</option>
+            </select>
+
+            <div className="d-inline h-100 fs-5">Total Price</div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Card;
+
+Note - 1. What is container class in bootstrap
+       2. Remember kaise humne ismei drop down options
+          create kiye hai
+
+----------------------------------------------------------------------------------------------------------
+
+Footer - 
+
+Just search footer bootstrap online and waha se utha lo.
+
+Code - 
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+function Footer() {
+  return (
+    <div>
+      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div className="col-md-4 d-flex align-items-center">
+          <Link
+            to="/"
+            className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1"
+          ></Link>
+          <span className="mb-3 mb-md-0 text-muted">© 2024 GoFood, Inc</span>
+        </div>
+
+        <ul className="nav col-md-4 justify-content-end list-unstyled d-flex"></ul>
+      </footer>
+    </div>
+  );
+}
+
+export default Footer;
+
+----------------------------------------------------------------------------------------------------------------
+
+Carousel bhi bootstrap mei se utha lo 
+
+Code - // in Carousel.js 
+
+import React from "react";
+
+function Carousal() {
+  return (
+    <div>
+      <div
+        id="carouselExampleControls"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img
+              src="/assets/images/burger.jpg"
+              className="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div className="carousel-item">
+            <img
+              src="/assets/images/Pasta.jpg"
+              className="d-block w-100"
+              alt="..."
+            />
+          </div>
+          <div className="carousel-item">
+            <img
+              src="/assets/images/Noodles.jpg"
+              className="d-block w-100"
+              alt="..."
+            />
+          </div>
+        </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Carousal;
+
+// in App.js - 
+
+import "./App.css";
+import Home from "./screens/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./screens/Login";
+
+import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+
+function App() {
+  return (
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+
+ Note - 1. npm install bootstrap-dark-5 bootstrap react-bootstrap
+        2. Now import these for carousel js functionality - 
+          import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
+          import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
+          import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
+        3. Simply write <img src='/assets/images/Call.svg' /> to access the Call.svg image 
+           from any of your react component.
+           Keeping your assets in public folder ensures that, 
+           you can access it from anywhere from the project, by just giving 
+           '/path_to_image' and no need for any path traversal '../../' like this
+           
+----------------------------------------------------------------------------------------------------------------
+
+New Property - style={{ objectFit: "contain !important" }}
+
+Yeh property chalegi hi chalegi because of !important 
+
+Problems - Carousel mei image abhi dhung se set nhi huyi hai 
+
+-----------------------------------------------------------------------------------------------------------------
+Backend Starts - 
+After installing mongoDb and importing data into it. 
+
+Make a folder called Backend and npm init. 
+
+Note - npm init ya further backend commands terminal mei likhne se 
+       pehle, keep in mind ki humme pehle path backend tak pahuchana hai 
+       using cd on terminal.
+
+Ab npm install express(jaise course mei backend sikhaya tha, waise), mongoose, nodemon
+
+
+Note - .gitignore file mei jaakar(joh react mei create huyi thi), convert /node_modules to node_modules under 
+       dependencies section, warna shayad code ko git mei push karne mei dikkat aa sakti hai.
+
+Note - react and node.js ke port alag hone chahiye 
+
+Note - mongoDb is schemaless by nature that is ki kaisa bhi data kisi bhi db mei 
+       store kar sakte hai in key_value pairs, to avoid problems caused by this 
+       we use mongoose joh things like validation check(schema) provide karta hai 
+       humme.
+--------------------------------------------------------------------------------------------------------------------
+
+How to connect MongoDb - 
+
+Just go on official website and copy paste code - 
+
+i.e 
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+Note - ismei connect ke ander ka link humme compass se mil jayega 
+       and final link would be compassLink/databaseName
+
+Code - 
+
+// in db.js - 
+
+const mongoose = require("mongoose");
+
+const mongoDB = async () => {
+  await mongoose
+    .connect("mongodb://localhost:27017/goFood")
+    .then(() => console.log("DB Connected"))
+    .catch((err) => console.log(err));
+};
+
+module.exports = mongoDB;
+
+Note - humne yaha pass connect function ko index.js mei 
+       pass kar diya hai for calling and its an async 
+       function.
+
+// in index.js - 
+
+const express = require("express");
+const app = express();
+const port = 9000;
+
+const mongoDB = require("./db");
+mongoDB();
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+-----------------------------------------------------------------------------------------
+
+Models and Schemas - 
+
+A Mongoose model is a wrapper of the Mongoose schema. A Mongoose schema defines 
+the document's properties, default values, types of data, validators, etc. 
+In contrast, a Mongoose model provides an interface for the database to create, 
+query, update, delete records, and so on.
+
+--> Creating a Mongoose schema and models mainly consists of three parts:
+
+Ex - 
+1. Referencing Mongoose:
+  
+  let mongoose = require('mongoose');
+  const { Schema } = mongoose;
+
+2. Schema Definition: 
+  
+  const blogSchema = new Schema({
+    // String is shorthand for {type: String}
+    title:  String,
+    date: { type: Date, default: Date.now },
+    body:   String,
+  });
+
+3. Creating and Exporting a Model:
+  
+  let Blog = mongoose.model('Blog', blogSchema); //creating a Model
+  module.exports = Blog //Exporting the created module.
+
+Note - a. we store different models in a folder name models
+       b. humne 3rd step mei yeh kiya hai --> module.exports = mongoose.model("user", UserSchema);
+-----------------------------------------------------------------------------------------------------
+
+Creating routes - 
+
+Code - 
+
+//in CreateUser.js inside Routes folder - 
+
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+
+router.post("/createUser", async (req, res) => {
+  try {
+    User.create({
+      name: "Garvit Manral",
+      password: "123456",
+      email: "garvitmanral@gmail.com",
+      location: "bigdu Bangdu",
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false });
+  }
+});
+
+module.exports = router;
+
+// in index.js - 
+
+const express = require("express");
+const app = express();
+const port = 9000;
+
+const mongoDB = require("./db");
+mongoDB();
+
+app.use(express.json());
+app.use("/api", require("./Routes/CreateUser"));
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+
+Note - 1. ismei humne express.json use kiya hai for res.json()
+       2. to use CreateUser(Post Request), we need to write the path - localhost:9000/api/CreateUser
+       3. The above command will create a user collection with default data in goFood database 
+       4. Remember the concept of router joh sabeel sirne bataya tha
+
+---------------------------------------------------------------------------------------------------------
+
+Agar humme thunderBird ke through user input bhijwana hai toh - 
+
+Step 1 - 
+Headers tag mei Content-Type = application/json karo 
+
+Step 2 - 
+body tag mei Json mein input likho 
+Ex - 
+{
+  "name": "Akshat",
+  "password":"513",
+  "email":"akshat44@gmail.com",
+  "location":"ksfjklsdfjsdfd"
+}
+
+Step 3 - 
+Make change in User.create()
+
+------------------------------------------------------------------------------------------------------
+Validation - 
+For this we gonna use express-validator 
+
+Code - //In CreateUser.js
+
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+
+const { body, validationResult } = require("express-validator");
+
+router.post(
+  "/createUser",
+  [
+    body("email").isEmail(),
+    body("name").isLength({ min: 5 }),
+    body("password", "Incorrect Password").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      User.create({
+        name: req.body.name,
+        password: req.body.password,
+        email: req.body.email,
+        location: req.body.location,
+      });
+      res.json({ success: true });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false });
+    }
+  }
+);
+
+module.exports = router;
+
+Note - just see its documentation online, its self-explanatory.
+
+---------------------------------------------------------------------------------------
+
+How to connect frontEnd(React) to backend(Nodejs, MongoDB)  - 
+Just send posts and get requests to backend from the frontend.
+
+Ex - For creating a new user - 
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+function SignUp() {
+  const [credentials, setCredentials] = useState({
+    name: "",
+    email: "",
+    password: "",
+    geoLocation: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:9000/api/CreateUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password,
+        location: credentials.geoLocation,
+      }),
+    });
+
+    const json = await response.json();
+    console.log(json);
+
+    if (!json.success) {
+      alert("Enter Valid Credentials");
+    }
+  };
+
+  const onChange = (event) => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
+  };
+  return (
+    <>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={credentials.name}
+              onChange={onChange}
+            />
+          </div>
+          <div class="mb-3">
+            <label htmlFor="email" class="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              value={credentials.email}
+              onChange={onChange}
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={credentials.password}
+              onChange={onChange}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="geoLocation" className="form-label">
+              Address
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              name="geoLocation"
+              value={credentials.geoLocation}
+              onChange={onChange}
+            />
+          </div>
+          <button type="submit" className="m-3 btn btn-success">
+            Submit
+          </button>
+          <Link to="/Login" className="m-3 btn btn-danger">
+            {" "}
+            Already a User{" "}
+          </Link>
+        </form>
+      </div>
+    </>
+  );
+}
+
+export default SignUp;
+
+Note - ismei humne fetch use karte huye ek post request generate ki hai.
+
+-----------------------------------------------------------------------------------------------------
+Making Login Page - 
+
+Step 1 - for outline just copy everything from signUp page and make minor adjustments.
+Step 2 - make changes in the backend, router
+
+Code - 
+//For Login Page -
+router.post(
+  "/loginUser",
+  [
+    body("email").isEmail(),
+    body("password", "Incorrect Password").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let email = req.body.email;
+    try {
+      let userData = await User.find({ email });
+      if (!userData) {
+        return res
+          .status(400)
+          .json({ errors: "Try logging in with the correct credentials 1." });
+      }
+
+      if (req.body.password !== userData[0].password) {
+        return res
+          .status(400)
+          .json({ errors: "Try logging in with the correct credentials 2." });
+      }
+
+      return res.json({ success: true });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false });
+    }
+  }
+);
+
+Note -1. abhi humne iss project mei login and singup ke routers CreateUser.js ke ander hi likhe hai.
+      2. validation pehle simply check abhi bhi hogi ki kya user ne valid email and password daala hai  
+         and if yes toh hi aage database mei check karenge.
+      3. Jab aise backend mei change kar diya ho toh 1st check using thunderbird whether the api is 
+         working fine or not.
+
+
+Step 3 - Make changes in the front end, that is connect api(frontend with backend) 
+
+Code (Final front end)  - 
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+function Login() {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  let navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:9000/api/loginUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+
+    const json = await response.json();
+    console.log(json);
+
+    if (!json.success) {
+      alert("Enter Valid Credentials");
+    }
+
+    if (json.success) {
+      navigate("/");
+    }
+  };
+
+  const onChange = (event) => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
+  };
+
+  return (
+    <>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={credentials.email}
+              onChange={onChange}
+            />
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={credentials.password}
+              onChange={onChange}
+            />
+          </div>
+
+          <button type="submit" className="m-3 btn btn-success">
+            Submit
+          </button>
+          <Link to="/createUser" className="m-3 btn btn-danger">
+            I am a new User
+          </Link>
+        </form>
+      </div>
+    </>
+  );
+}
+
+export default Login;
+
+Note - we used useNavigate for redirecting after successfully logging in.
+
+----------------------------------------------------------------------------------------------
+bcryptjs - 
+
+Bcrypt is a hashing algorithm designed by Niels Provos and David Mazieres based on the Blowfish cipher. 
+It is commonly used for passwords and takes regular hashing algorithms further by introducing a salt. 
+The salt is a string mixed up with the password before hashing.
+
+Step 1 - npm install bcryptjs
+
+Step 2 - make changes in correct route, here its CreateUser 
+        a. require 
+        b. salt 
+        c. hash 
+
+Code - 
+
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+
+const { body, validationResult } = require("express-validator");
+
+const bcrypt = require("bcryptjs");
+// For SingUp Page -
+
+router.post(
+  "/createUser",
+  [
+    body("email").isEmail(),
+    body("name").isLength({ min: 5 }),
+    body("password", "Incorrect Password").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const secPassword = await bcrypt.hash(req.body.password, salt);
+    try {
+      User.create({
+        name: req.body.name,
+        password: secPassword,
+        email: req.body.email,
+        location: req.body.location,
+      });
+      res.json({ success: true });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false });
+    }
+  }
+);
+
+module.exports = router;
+
+----------------------------------------------------------------------------------------
+Jwt - JSON Web Tokens
+
+A JSON web token(JWT) is JSON Object which is used to securely transfer information 
+over the web(between two parties). It can be used for an authentication system and 
+can also be used for information exchange. The token is mainly composed of header, 
+payload, signature. These three parts are separated by dots(.)
+
+Step 1 - npm install jsonwebtoken
+
+Step 2 - make changes in correct route, here its loginUser 
+        a. require jwt, make secret 
+        b. compare passwords using bcrypt.compare()
+        c. make an object containing unique identification for each entry, usually id
+        d. create authToken and return it in response. 
+        e. front end mei jaake store it in localStorage.
+
+
+Code - 
+//backend 
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+
+const { body, validationResult } = require("express-validator");
+
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const jwtSecret = "MyNameIsEndToEndYoutubeChannelSutta";
+
+//For Login Page -
+router.post(
+  "/loginUser",
+  [
+    body("email").isEmail(),
+    body("password", "Incorrect Password").isLength({ min: 5 }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    let email = req.body.email;
+    try {
+      let userData = await User.find({ email });
+      if (!userData) {
+        return res
+          .status(400)
+          .json({ errors: "Try logging in with the correct credentials 1." });
+      }
+
+      const pwdCompare = await bcrypt.compare(
+        req.body.password,
+        userData[0].password
+      );
+      if (pwdCompare == false) {
+        return res
+          .status(400)
+          .json({ errors: "Try logging in with the correct credentials 2." });
+      }
+
+      const data = {
+        user: {
+          id: userData.id,
+        },
+      };
+
+      const authToken = jwt.sign(data, jwtSecret);
+      return res.json({ success: true, authToken: authToken });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false });
+    }
+  }
+);
+
+module.exports = router;
+
+//Frontend (in Login.js)- 
+
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+function Login() {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  let navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:9000/api/loginUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+
+    const json = await response.json();
+    console.log(json);
+
+    if (!json.success) {
+      alert("Enter Valid Credentials");
+    }
+
+    if (json.success) {
+      localStorage.setItem("authToken", json.authToken);
+      console.log(localStorage.getItem("authToken"));
+      navigate("/");
+    }
+  };
+
+  const onChange = (event) => {
+    setCredentials({ ...credentials, [event.target.name]: event.target.value });
+  };
+
+  return (
+    <>
+      <div className="container">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={credentials.email}
+              onChange={onChange}
+            />
+            <div id="emailHelp" className="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={credentials.password}
+              onChange={onChange}
+            />
+          </div>
+
+          <button type="submit" className="m-3 btn btn-success">
+            Submit
+          </button>
+          <Link to="/createUser" className="m-3 btn btn-danger">
+            I am a new User
+          </Link>
+        </form>
+      </div>
+    </>
+  );
+}
+
+export default Login;
+
+
+------------------------------------------------------------------------------------------
+How to fetch all data from mongoDB using mongoose - 
+
+Code -// in db.js - 
+
+const mongoose = require("mongoose");
+
+const mongoDB = async () => {
+  await mongoose
+    .connect("mongodb://localhost:27017/goFood")
+    .then(async () => {
+      console.log("DB Connected");
+      const fetchData = await mongoose.connection.db.collection("food_items");
+      global.food_items = await fetchData.find({}).toArray();
+      // console.log(global.food_items);
+    })
+    .catch((err) => console.log(err));
+};
+
+module.exports = mongoDB;
+
+
+-------------------------------------------------------------------------------------
+Creating an api for getting all food_items - 
+
+In index.jsx, add - 
+app.use("/api", require("./Routes/DisplayData"));
+
+Note - Isse bas hum yeh bata rhe hai ki DisplayData wale code ko bhi include karo 
+
+In DisplayData - 
+
+const express = require("express");
+const router = express.Router();
+
+router.post("/foodData", (req, res) => {
+  try {
+    // console.log(global.food_items);
+    res.send({ food_items: global.food_items });
+  } catch (error) {
+    console.log(error.message);
+    res.send("Server Error");
+  }
+});
+module.exports = router;
+
+------------------------------------------------------------------------------------------
+
+Now we want to load both food categories and items, but we want 
+ki pehle categories load ho phir items taaki agar categories mei error 
+aaye toh woh pehle catch ho jaaye. For this we used the concept of then.
+
+Code -// In db.js - 
+
+const mongoose = require("mongoose");
+
+const mongoDB = async () => {
+  await mongoose
+    .connect("mongodb://localhost:27017/goFood")
+    .then(async () => {
+      console.log("DB Connected");
+      const foodCategory = await mongoose.connection.db.collection(
+        "foodCategory"
+      );
+      global.food_category = await foodCategory.find({}).toArray();
+      // console.log(global.food_category);
+    })
+    .then(async () => {
+      const fetchData = await mongoose.connection.db.collection("food_items");
+      global.food_items = await fetchData.find({}).toArray();
+      // console.log(global.food_items);
+    })
+    .catch((err) => console.log(err));
+};
+
+module.exports = mongoDB;
+
+
+Code - // in DisplayData.js - 
+
+const express = require("express");
+const router = express.Router();
+
+router.post("/foodData", (req, res) => {
+  try {
+    res.send({
+      food_items: global.food_items,
+      food_category: global.food_category,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.send("Server Error");
+  }
+});
+module.exports = router;
+
+----------------------------------------------------------------------
+How to send all this data to home page when loaded - 
+
+Code -//In Home.js - 
+
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Card from "../components/Card";
+import Carousal from "../components/Carousal";
+
+function Home() {
+  const [foodCat, setFoodCat] = useState([]);
+  const [foodItems, setFoodItems] = useState([]);
+
+  const loadData = async () => {
+    let response = await fetch("http://localhost:9000/api/foodData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    response = await response.json();
+    setFoodCat(response.food_category);
+    setFoodItems(response.food_items);
+    //console.log(response.food_items, response.food_category);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Carousal />
+      </div>
+      <div className="container">
+        <Card />
+        <Card />
+        <Card />
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+export default Home;
+
+Note - used useState and useEffect here 
+-------------------------------------------------------------------------------
+How to send the retreived data to Card component - 
+
+Code - //In Home.js 
+
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Card from "../components/Card";
+import Carousal from "../components/Carousal";
+
+function Home() {
+  const [foodCat, setFoodCat] = useState([]);
+  const [foodItems, setFoodItems] = useState([]);
+
+  const loadData = async () => {
+    let response = await fetch("http://localhost:9000/api/foodData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    response = await response.json();
+    setFoodCat(response.food_category);
+    setFoodItems(response.food_items);
+    //console.log(response.food_items, response.food_category);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <Carousal />
+      </div>
+      <div className="container">
+        {foodCat.map((data) => {
+          return (
+            <div className="row mb-3">
+              {/* For printing category Name  */}
+              <div key={data.id} className="fs-3 m-3">
+                {data.CategoryName}
+              </div>
+              <hr />
+              {/* For printing items */}
+              {foodItems
+                .filter((item) => item.CategoryName === data.CategoryName)
+                .map((filterItems) => {
+                  return (
+                    <div
+                      key={filterItems.id}
+                      className="col-12 col-md-6 col-lg-3"
+                    >
+                      <Card
+                        foodName={filterItems.name}
+                        options={filterItems.options}
+                        imgSrc={filterItems.img}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          );
+        })}
+        <Card />
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+export default Home;
+
+Note - humne foodCategory ke ander footItems ko pass kiya hai cause layout
+       waisa chahiye tha.
+       And humne ismei grid system bhi use kiya hai bootstrap ka.
+
+----------------------------------------------------------------------------------
+
+Note - Price Options wale part mei dikkat aa rhi hai 
+       options array ke elements ko access nhi kar paa 
+       rha hu, when passed as a prop.
+
+      Aur images bhi load nhi ho rhi
+
+      Carousel ko home page ke ander hi likh diya 
+----------------------------------------------------------------------------------
+
+How to make proper search bar and filter the items while typing - 
+
+Code - in Home.js - 
+
+import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Card from "../components/Card";
+
+function Home() {
+  const [foodCat, setFoodCat] = useState([]);
+  const [foodItems, setFoodItems] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const loadData = async () => {
+    let response = await fetch("http://localhost:9000/api/foodData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    response = await response.json();
+    setFoodCat(response.food_category);
+    setFoodItems(response.food_items);
+    //console.log(response.food_items, response.food_category);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <Navbar />
+      </div>
+      <div>
+        <div
+          id="carouselExampleControls"
+          className="carousel slide"
+          data-bs-ride="carousel"
+          style={{ objectFit: "contain !important" }}
+        >
+          <div className="carousel-inner" id="carousel">
+            <div className="carousel-caption" style={{ zIndex: "10" }}>
+              <div className="d-flex justify-content-center">
+                <input
+                  className="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  style={{ margin: "2px" }}
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="carousel-item active">
+              <img
+                src="/assets/images/burger.jpg"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src="/assets/images/Pasta.jpg"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src="/assets/images/Noodles.jpg"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="next"
+          >
+            <span
+              className="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div className="container">
+        {foodCat.map((data) => {
+          return (
+            <div className="row mb-3">
+              {/* For printing category Name  */}
+              <div key={data.id} className="fs-3 m-3">
+                {data.CategoryName}
+              </div>
+              <hr />
+              {/* For printing items */}
+              {foodItems
+                .filter(
+                  (item) =>
+                    item.CategoryName === data.CategoryName &&
+                    item.name.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((filterItems) => {
+                  return (
+                    <div
+                      key={filterItems.id}
+                      className="col-12 col-md-6 col-lg-3"
+                    >
+                      <Card
+                        foodName={filterItems.name}
+                        options={filterItems.options}
+                        imgSrc={filterItems.img}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          );
+        })}
+        <Card />
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+export default Home;
+
+-------------------------------------------------------------------------------------------------------
+To properly set a navbar, use the logic with authtoken to set logout and login options properly - 
+
+Code - //in Navbar.js  - 
+
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+function Navbar() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
+  return (
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+        <div className="container-fluid">
+          <Link className="navbar-brand fs-1 fst-italic" to="#">
+            GoFood
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav me-auto mb-2">
+              <li className="nav-item">
+                <Link
+                  className="nav-link active fs-5"
+                  aria-current="page"
+                  to="#"
+                >
+                  Home
+                </Link>
+              </li>
+              {localStorage.getItem("authToken") ? (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active fs-5"
+                    aria-current="page"
+                    to="#"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+            </ul>
+            {!localStorage.getItem("authToken") ? (
+              <div className="d-flex">
+                <Link className="btn bg-white text-success mx-1" to="/login">
+                  Login
+                </Link>
+                <Link
+                  className="btn bg-white text-success mx-1"
+                  to="/CreateUser"
+                >
+                  SignUp
+                </Link>
+              </div>
+            ) : (
+              <div>
+                <div className="btn bg-white text-success mx-2">My Cart </div>
+                <div
+                  className="btn bg-white text-danger mx-2"
+                  onClick={handleLogout}
+                >
+                  Logout{" "}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default Navbar;
+
+-----------------------------------------------------------------------------------------
+How to display right price  - 
+
+Problem - Intially NAN value aa rhi hai cause size is empty in beginning.
+Solution - useRef and useEffect are used to solve this problem.
+
+Note  - Yeh bas main price code section hai not the whole Card.js 
+
+Code -//in Card.js - 
+
+import { React, useState, useRef, useEffect } from "react";
+
+function Card(props) {
+  let options = props.options[0];
+  let priceOptions = Object.keys(options);
+
+  const [qty, setQty] = useState(1);
+  const [size, setSize] = useState("");
+
+
+  const priceRef = useRef();
+  let finalPrice = qty * parseInt(options[size]);
+  useEffect(() => {
+    setSize(priceRef.current.value);
+  }, []);
+
+  return (
+    <>
+      {" "}
+      <div className="card mt-3" style={{ width: "18rem", maxHeight: "360px" }}>
+            <select
+              className="m-2 h-100 bg-success rounded"
+              ref={priceRef}
+              onChange={(e) => setSize(e.target.value)}
+            >
+              {priceOptions.map((data) => {
+                return (
+                  <option key={data} value={data}>
+                    {data}
+                  </option>
+                );
+              })}
+            </select>
+
+            <div className="d-inline h-100 fs-5">Rs.{finalPrice}</div>
+      </div>
+    </>
+  );
+}
+
+export default Card;
+-------------------------------------------------------------------------------------
+
+Creating a pop badge in cart button - 
+
+import Badge from "react-bootstrap/Badge";
+
+<div className="btn bg-white text-success mx-2">
+    My Cart{" "}
+    <Badge pill bg="danger">
+      2
+    </Badge>
+</div>
+
+Note - Correct length of Cart ke liye bas useDispatchCart se state ki
+       length nikalwa kar dikha do.
+---------------------------------------------------------------------------------------
+
+How to Create a Cart joh screen ke bahar aa jaye, (modal concept) -
+
+A. In Cart.js joh humne copy past ki hai -
+1. Pehle ek table banado for cart UI.
+2. Abhi ismei checkout ke feature par dhyaan matt do(in Future), mainly yeh 
+   kar rhe hai ki using contextReducer concept humne joh state mei items 
+   store kar rakhe hai, unhe bas display in table format karwa rhe hai.
+
+B. We have to create a Modal.js, modal mtlb ki screen ke uppar Cart show 
+   ho rhi hai, iska code bhi seedhe copy paste from vid.
+
+C. Model ko index.html that is in public folder mei likhna padega.
+
+    <div id="root"></div>
+    <div id="cart-root"></div> //This line is for modal 
+
+D. Model and Cart ka connection Navbar mei ho rha hai.
+
+    import React, { useState } from "react";
+    import { Link, useNavigate } from "react-router-dom";
+    import Badge from "react-bootstrap/Badge";
+    import Modal from "../Modal";
+    import Cart from "../screens/Cart";
+
+    function Navbar() {
+      const [cartView, setCartView] = useState(false);
+      const navigate = useNavigate();
+      const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        navigate("/login");
+      };
+      return (
+        <div>
+          <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+            <div className="container-fluid">
+              <Link className="navbar-brand fs-1 fst-italic" to="#">
+                GoFood
+              </Link>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav me-auto mb-2">
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active fs-5"
+                      aria-current="page"
+                      to="#"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  {localStorage.getItem("authToken") ? (
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link active fs-5"
+                        aria-current="page"
+                        to="#"
+                      >
+                        My Orders
+                      </Link>
+                    </li>
+                  ) : (
+                    ""
+                  )}
+                </ul>
+                {!localStorage.getItem("authToken") ? (
+                  <div className="d-flex">
+                    <Link className="btn bg-white text-success mx-1" to="/login">
+                      Login
+                    </Link>
+                    <Link
+                      className="btn bg-white text-success mx-1"
+                      to="/CreateUser"
+                    >
+                      SignUp
+                    </Link>
+                  </div>
+                ) : (
+                  <div>
+                    <div
+                      className="btn bg-white text-success mx-2"
+                      onClick={() => {
+                        setCartView(true);
+                      }}
+                    >
+                      My Cart{" "}
+                      <Badge pill bg="danger">
+                        2
+                      </Badge>
+                    </div>
+                    {cartView ? (
+                      <Modal onClose={() => setCartView(false)}>
+                        <Cart />
+                      </Modal>
+                    ) : null}
+                    <div
+                      className="btn bg-white text-danger mx-2"
+                      onClick={handleLogout}
+                    >
+                      Logout{" "}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </nav>
+        </div>
+      );
+    }
+
+    export default Navbar;
+
+--------------------------------------------------------------------------------------------------------------
+
+Removing an Item from the Cart- 
+1. Pehle toh dispatch mei Remove ka code likho - 
+
+   case "REMOVE":
+      let newArr = [...state];
+      newArr.splice(action.index, 1);
+      return newArr;
+
+Note - hum directly state mei change nhi karte, copy karke phir change then return 
+
+2. In Cart.js, just OnClick lagar Remove call kardo with index value - 
+
+ <button type="button" className="btn p-0">
+    <div
+      onClick={() => {
+        dispatch({ type: "REMOVE", index: index });
+      }}
+    >
+      X
+    </div>
+  </button>{" "}
+
+-------------------------------------------------------------------------------------------------------------
+Update by Quantity - 
+
+Note - Yeh part mei skip kar rha hu as it is not that important, the user can just delete 
+       his/her previous order from the cart.
+
+-------------------------------------------------------------------------------------------------------------
+
+How to add order from cart to the orders data base after clicking checkout - 
+
+1. First Create order collection using mongoose - 
+
+const mongoose = require("mongoose");
+// const { required } = require("nodemon/lib/config");
+const { Schema } = mongoose;
+
+const OrderSchema = new Schema({
+  Email: {
+    type: String,
+    required: true,
+  },
+  Orders: {
+    type: Array,
+    required: true,
+  },
+  Date: {
+    type: String,
+    required: true,
+  },
+});
+
+module.exports = mongoose.model("Orders", OrderSchema);
+
+2. Create changes in cart.js taaki checkout click hone par neccessary function call ho - 
+
+import { useDispatchCart } from "../components/ContextReducer";
+
+export default function Cart() {
+  let obj = useDispatchCart();
+  let data = obj.state;
+  let dispatch = obj.dispatch;
+  if (data.length === 0) {
+    return (
+      <div>
+        <div className="m-5 w-100 text-center fs-3">The Cart is Empty!</div>
+      </div>
+    );
+  }
+
+  const handleCheckOut = async () => {
+    let email = localStorage.getItem("currentUserEmail");
+
+    const response = await fetch("http://localhost:9000/api/CreateOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        data: data,
+        date: new Date(),
+      }),
+    });
+    const json = await response.json();
+
+    if (json.success) {
+      dispatch({ type: "DROP" });
+    }
+  };
+  <button className="btn bg-success mt-5 " onClick={handleCheckOut}>
+    {" "}
+    Check Out{" "}
+  </button>
+}
+
+Note - A. humme backend ka code backend mei likhna hota hai toh hum yaha frontend mei 
+          seedhe mongoose command like create nhi likh sakte, therefore we pass the values 
+          as a post request back to backend.
+       B. hum email as an order reference lenge joh localStorage mei at the time of login saved hoga.
+          And date ke liye just use new Date()
+
+3. Front end se data CreateOrder.js (backend mei gya hai)  - 
+
+const express = require("express");
+const router = express.Router();
+const Orders = require("../models/Orders");
+
+router.post("/createOrder", (req, res) => {
+  console.log(req.body);
+  try {
+    Orders.create({
+      Email: req.body.email,
+      Orders: req.body.data,
+      Date: req.body.date,
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false });
+  }
+});
+module.exports = router;
+
+Note  - Yeh front end(Cart.js) mei response as true ya false bhejega. 
+        If its true to hum dispatch concept ke through state ko yaani cart ko empty kardenge.
+
+Note - index.js mei api call bhi karni hai 
+       app.use("/api", require("./Routes/CreateOrder"));
+-------------------------------------------------------------------------------------------------------------
+
+Very Very important - 
+General Process -
+
+Front-end - 
+1. Make the front-end UI using React 
+2. Make a React api link to it from home page by Creating a route for that 
+   specific page on the react app.js 
+
+Backend - 
+3. Create a new mongoDb collection model for it.
+4. Create a route for it, where the collection would be used.
+5. To use this route, call this file in backend's index.js - app.use()..
+
+Connection between front-end and backend - 
+This will be done via api calls.
+Front-end to Backend ---> api call karna hai --> route.post("/path")
+Backend to Frontend mei data res.json/res.send aise format mei bhejenge.
+
+Note - backend ke codes front end mei nhi likhe skte, like can't use 
+       mongoose commands in react toh api calls ke through hi data 
+       transfer hoga.
+
+Note - Front-end ka console.log online js engine par dikhta hai where as 
+       Back-end ka console.log vs code terminal par dikhta hai.
+-------------------------------------------------------------------------------------------------------------
+How myOrders page was created  - 
+
+Mainly Uppar wala method hi follow huya hai.
+
+Things to remember - 
+1. Frontend ki api calling mei useState and useEffect are used together to avoid 
+   empty array error while fetching.
+
+------------------------------------------------------------------------------------------------------------
+
+How to Use env in React - 
+
+You can set environment variables in .env file
+
+Here are the steps
+
+create a file with the name of .env in the project root folder
+
+Now, at the time to add a variable you have to add prefix REACT_APP for e.g: You want to add API_URL variable for your API. So you have to add a variable with prefix RECT_APP as below
+
+REACT_APP_API_URL
+
+Stop your running server and re-run using npm start
+
+To access env variable you have to call like: process.env.REACT_APP_API_URL
+
+Here you go. Now you can access the env variable
+
+Note:
+
+Please make sure you have added prefix (REACT_APP)
+Please stop your server and restart so it will load env variable if added
+
+-----------------------------------------------------------------------------------------------------------------
