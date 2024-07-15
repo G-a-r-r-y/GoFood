@@ -11,12 +11,12 @@ const mongoDB = async () => {
         "foodCategory"
       );
       global.food_category = await foodCategory.find({}).toArray();
-      console.log(global.food_category);
+      //console.log(global.food_category);
     })
     .then(async () => {
       const fetchData = await mongoose.connection.db.collection("food_items");
       global.food_items = await fetchData.find({}).toArray();
-      console.log(global.food_items);
+      // console.log(global.food_items);
     })
     .catch((err) => console.log(err));
 };
