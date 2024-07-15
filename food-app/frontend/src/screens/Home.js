@@ -17,6 +17,7 @@ function Home() {
       },
     });
 
+    console.log(response);
     response = await response.json();
     setFoodCat(response.food_category);
     setFoodItems(response.food_items);
