@@ -9,19 +9,14 @@ function Home() {
   const [search, setSearch] = useState("");
 
   const loadData = async () => {
-    // let response = await fetch(`${process.env.REACT_APP_URL}/api/foodData`, {
-    //   method: "POST",
-    //   // mode:"no-cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-
-    
     let response = await fetch(`${process.env.REACT_APP_URL}/api/foodData`, {
-      mode:"no-cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
+  
     console.log(response);
     response = await response.json();
     setFoodCat(response.food_category);
