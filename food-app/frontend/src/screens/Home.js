@@ -15,7 +15,7 @@ function Home() {
         "Content-Type": "application/json",
       },
     });
-
+ 
   
     console.log(response);
     response = await response.json();
