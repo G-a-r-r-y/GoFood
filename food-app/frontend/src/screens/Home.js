@@ -9,12 +9,17 @@ function Home() {
   const [search, setSearch] = useState("");
 
   const loadData = async () => {
+    // let response = await fetch(`${process.env.REACT_APP_URL}/api/foodData`, {
+    //   method: "POST",
+    //   // mode:"no-cors",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+
+    
     let response = await fetch(`${process.env.REACT_APP_URL}/api/foodData`, {
-      method: "POST",
-      // mode:"no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      mode:"no-cors",
     });
 
     console.log(response);
