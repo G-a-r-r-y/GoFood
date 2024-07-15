@@ -3,7 +3,11 @@ const app = express();
 const port = 9000;
 const mongoDB = require("./db");
 mongoDB();
- 
+
+app.use((req,res)=>{
+ res.send("This is index.js");
+})
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://go-food-frontend-black.vercel.app/"); 
   res.header(
