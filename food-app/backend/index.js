@@ -4,7 +4,7 @@ const port = 9000;
 const mongoDB = require("./db");
 mongoDB();
 
-app.use((req,res)=>{
+app.use("/",(req,res)=>{
  res.send("This is index.js");
 })
 
