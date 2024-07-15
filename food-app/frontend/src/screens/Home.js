@@ -11,7 +11,7 @@ function Home() {
   const loadData = async () => {
     let response = await fetch(`${process.env.REACT_APP_URL}/api/foodData`, {
       method: "POST",
-      mode:"no-cors",
+      // mode:"no-cors",
       headers: {
         "Content-Type": "application/json",
       },
